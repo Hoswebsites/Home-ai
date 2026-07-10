@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy & Terms - Home of AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #05080f;
+            --bg-surface: #0a0f1a;
+            --bg-card: #0d1320;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent: #6c5ce7;
+            --accent-glow: #a78bfa;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --glass-bg: rgba(10, 15, 26, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* --- Ambient Background --- */
+        .ambient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.2;
+        }
+        .orb-1 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            top: -10%; right: -5%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 80px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 40px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50px;
+            border: 1px solid var(--border-subtle);
+        }
+        .back-btn:hover { color: white; background: rgba(255,255,255,0.1); }
+
+        header {
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-glow) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .last-updated {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin-top: 60px;
+            margin-bottom: 24px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            margin-bottom: 24px;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-subtle);
+            margin: 60px 0;
+        }
+
+        ul {
+            margin-bottom: 30px;
+            padding-left: 24px;
+            list-style-type: none;
+        }
+
+        li {
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+            position: relative;
+        }
+        li::before {
+            content: "→";
+            position: absolute;
+            left: -24px;
+            color: var(--accent);
+        }
+
+        .email-highlight {
+            font-weight: 700;
+            color: var(--accent-glow);
+            background: rgba(108, 92, 231, 0.1);
+            padding: 4px 12px;
+            border-radius: 8px;
+        }
+
+        footer {
+            margin-top: 100px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-subtle);
+            text-align: center;
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 40px 20px; }
+            h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-orb orb-1"></div>
+
+    <main class="container">
+        <a href="javascript:history.back()" class="back-btn">← Back to Platform</a>
+        
+        <header>
+            <h1>Privacy & Terms</h1>
+            <p class="last-updated">Last Updated: July 2026</p>
+        </header>
+
+        <p>Welcome to Home of AI. Our mission is to provide seamless access to the world's most advanced artificial intelligence models while maintaining transparency and trust.</p>
+
+        <p>By accessing our platform, you agree to the following terms and privacy practices. We recommend reading them carefully to understand your rights and our responsibilities.</p>
+
+        <hr>
+
+        <h2>1. Experimental Nature</h2>
+        <p>Home of AI is an experimental platform. Every new account is gifted 300 Credits for testing and exploration. These Credits hold no monetary value and are provided solely to facilitate your experience with AI technology.</p>
+
+        <hr>
+
+        <h2>2. Data Usage & Training</h2>
+        <p>To improve our services and push the boundaries of AI, we may analyze and process the content you submit. By using the service, you grant Home of AI a license to use your prompts and interactions for research, model training, and service optimization.</p>
+        
+        <p>We take significant measures to anonymize data used for these purposes, ensuring your personal identity remains protected.</p>
+
+        <hr>
+
+        <h2>3. Acceptable Use Policy</h2>
+        <ul>
+            <li>No automated scraping or bot access.</li>
+            <li>No generation of illegal or harmful content.</li>
+            <li>No attempts to bypass platform security or credit systems.</li>
+            <li>One account per user policy is strictly enforced.</li>
+        </ul>
+
+        <hr>
+
+        <h2>4. Contact & Support</h2>
+        <p>For credit increase requests, technical support, or privacy inquiries, please reach out to our team:</p>
+        <p><span class="email-highlight">afnan@afnanai.com</span></p>
+
+        <footer>
+            &copy; 2026 Home of AI. Built for the future of intelligence.
+        </footer>
+    </main>
+</body>
+</html>
