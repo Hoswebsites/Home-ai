@@ -37,409 +37,132 @@
             --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
         body {
             background-color: var(--bg-deep);
             color: var(--text-primary);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
             min-height: 100vh;
         }
 
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-deep);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.25);
-        }
-
-        ::selection {
-            background: var(--accent);
-            color: #fff;
-        }
-
-        #canvas-scene {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.55;
-        }
+        #canvas-scene { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.55; }
 
         .ambient-orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(120px);
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.35;
+            position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: -1; opacity: 0.35;
             animation: orbFloat 12s ease-in-out infinite;
         }
-        .orb-1 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-            top: -15%;
-            right: -10%;
-            animation-delay: 0s;
-        }
-        .orb-2 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--accent2) 0%, transparent 70%);
-            bottom: -10%;
-            left: -8%;
-            animation-delay: -6s;
-        }
-        .orb-3 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
-            top: 45%;
-            left: 55%;
-            animation-delay: -3s;
-            opacity: 0.2;
-        }
+        .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, var(--accent) 0%, transparent 70%); top: -15%; right: -10%; }
+        .orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, var(--accent2) 0%, transparent 70%); bottom: -10%; left: -8%; }
 
         @keyframes orbFloat {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(30px, -40px) scale(1.1); }
-            50% { transform: translate(-20px, -20px) scale(0.95); }
-            75% { transform: translate(-35px, 30px) scale(1.05); }
+            50% { transform: translate(20px, -20px) scale(1.05); }
         }
 
         nav {
-            padding: 18px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(8, 11, 20, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-subtle);
-            transition: all 0.4s var(--transition-smooth);
-        }
-        nav.scrolled {
-            padding: 12px 40px;
-            background: rgba(8, 11, 20, 0.9);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            padding: 18px 40px; display: flex; justify-content: space-between; align-items: center;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(8, 11, 20, 0.75); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-subtle);
         }
 
         .logo {
-            font-family: 'Space Grotesk', 'Inter', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700;
             background: linear-gradient(135deg, #f1f5f9 0%, #a78bfa 60%, #22d3ee 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            cursor: pointer;
-            user-select: none;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .cta-btn {
-            padding: 12px 28px;
-            background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
-            color: #fff;
-            border-radius: 50px;
-            cursor: pointer;
-            border: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 0.3px;
-            transition: all 0.35s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(108, 92, 231, 0.3);
-            font-family: 'Inter', sans-serif;
-            text-decoration: none;
-        }
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 35px rgba(108, 92, 231, 0.5);
-        }
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 24px; position: relative; z-index: 1; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 32px; }
+        .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(3rem, 8vw, 7.5rem); font-weight: 800; letter-spacing: -3px; line-height: 1.05; margin-bottom: 20px; color: white; }
+        .hero h1 .highlight { background: linear-gradient(135deg, #a78bfa 0%, #22d3ee 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 120px 24px 80px;
-            position: relative;
-            z-index: 1;
-        }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-            backdrop-filter: blur(10px);
-            opacity: 0;
-            letter-spacing: 0.5px;
-        }
+        .btn-primary { padding: 15px 32px; background: #fff; color: #000; border-radius: 50px; cursor: pointer; border: none; font-weight: 600; text-decoration: none; transition: 0.3s; }
+        .btn-outline { padding: 15px 32px; background: transparent; color: #fff; border-radius: 50px; cursor: pointer; border: 1.5px solid rgba(255, 255, 255, 0.3); font-weight: 600; transition: 0.3s; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(255, 255, 255, 0.2); }
 
-        .hero h1 {
-            font-family: 'Space Grotesk', 'Inter', sans-serif;
-            font-size: clamp(3rem, 8vw, 7.5rem);
-            font-weight: 800;
-            letter-spacing: -3px;
-            line-height: 1.05;
-            margin-bottom: 20px;
-            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 40%, #818cf8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            opacity: 0;
-        }
+        .features { padding: 80px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; max-width: 1200px; margin: 0 auto; z-index: 1; position: relative; }
+        .card { padding: 40px 32px; background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border-card); transition: 0.4s; }
+        .card:hover { transform: translateY(-8px); border-color: var(--accent); background: var(--bg-card-hover); }
 
-        .hero p {
-            font-size: clamp(1rem, 2.5vw, 1.35rem);
-            color: var(--text-secondary);
-            max-width: 650px;
-            opacity: 0;
-            line-height: 1.7;
-        }
-        .hero-actions {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 36px;
-            opacity: 0;
-        }
+        .about { padding: 100px 40px; max-width: 800px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+        .legal-link { color: var(--accent-glow); text-decoration: none; font-weight: 600; border-bottom: 1px solid transparent; transition: 0.3s; }
+        .legal-link:hover { border-color: var(--accent-glow); }
 
-        .features {
-            padding: 80px 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 28px;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        .card {
-            padding: 40px 32px;
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-card);
-            transition: all 0.45s var(--transition-smooth);
-            cursor: default;
-        }
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: var(--shadow-glow), var(--shadow-card);
-            background: var(--bg-card-hover);
-        }
+        /* Modal Styles */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.4s; }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-content { background: var(--bg-card); padding: 40px; border-radius: 24px; border: 1px solid var(--border-card); max-width: 400px; width: 90%; text-align: center; }
 
-        .about {
-            padding: 100px 40px;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-        .about h2 {
-            font-family: 'Space Grotesk', 'Inter', sans-serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            letter-spacing: -1px;
-            margin-bottom: 20px;
-        }
-        .about p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-
-        .legal-link {
-            color: var(--accent-glow);
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-            border-bottom: 1px solid transparent;
-        }
-        .legal-link:hover {
-            border-color: var(--accent-glow);
-        }
-
-        /* Modal Styles (Google Login Placeholder) */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
-        }
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-content {
-            background: var(--bg-card);
-            padding: 40px;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-card);
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            transform: scale(0.9);
-            transition: all 0.4s var(--transition-smooth);
-        }
-        .modal-overlay.active .modal-content {
-            transform: scale(1);
-        }
+        footer { padding: 40px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; border-top: 1px solid var(--border-subtle); position: relative; z-index: 1; }
     </style>
 </head>
 <body>
     <div id="canvas-scene"></div>
     <div class="ambient-orb orb-1"></div>
     <div class="ambient-orb orb-2"></div>
-    <div class="ambient-orb orb-3"></div>
 
     <nav id="navbar">
         <div class="logo">Home of AI</div>
-        <a href="Home.html" class="cta-btn">Launch App</a>
+        <a href="Home.html" class="btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">Launch App</a>
     </nav>
 
     <main>
         <section class="hero">
-            <div class="hero-badge">
-                <span class="dot"></span>
-                v2.0 Beta - Now Live
-            </div>
+            <div class="hero-badge">v2.0 Beta - Now Live</div>
             <h1>Unlock the <span class="highlight">Future</span> of Intelligence</h1>
-            <p>Access the world's most powerful AI models in one unified platform. Built for speed, privacy, and limitless creativity.</p>
-            <div class="hero-actions">
-                <a href="Home.html" style="text-decoration:none" class="btn-primary">Get Started Free</a>
+            <p style="color: var(--text-secondary); max-width: 600px; margin-bottom: 30px;">Access the world's most powerful AI models in one unified platform. Built for speed, privacy, and limitless creativity.</p>
+            <div style="display: flex; gap: 16px;">
+                <a href="Home.html" class="btn-primary">Get Started Free</a>
                 <button class="btn-outline" onclick="openModal()">Sign In</button>
             </div>
         </section>
 
         <section class="features">
-            <div class="card">
-                <h3>Multi-Model Access</h3>
-                <p>Switch between GPT-4o, Claude 3.5, and specialized models instantly.</p>
-            </div>
-            <div class="card">
-                <h3>Privacy First</h3>
-                <p>Your data is encrypted and never used for training without permission.</p>
-            </div>
-            <div class="card">
-                <h3>Lightning Fast</h3>
-                <p>Optimized infrastructure for near-zero latency responses.</p>
-            </div>
+            <div class="card"><h3>Multi-Model Access</h3><p style="color: var(--text-secondary);">Switch between GPT-4o, Claude 3.5, and specialized models instantly.</p></div>
+            <div class="card"><h3>Privacy First</h3><p style="color: var(--text-secondary);">Your data is encrypted and never used for training without permission.</p></div>
+            <div class="card"><h3>Lightning Fast</h3><p style="color: var(--text-secondary);">Optimized infrastructure for near-zero latency responses.</p></div>
         </section>
 
         <section class="about">
             <h2>Built for You</h2>
-            <p>Home of AI is designed to bridge the gap between human creativity and machine intelligence. We believe in making the most advanced tools accessible to everyone.</p>
-            <p>Read our <a href="Politics.html" class="legal-link">Privacy Policy & Terms of Service</a> to learn more about how we protect your data.</p>
+            <p style="color: var(--text-secondary); margin: 20px 0;">Home of AI is designed to bridge the gap between human creativity and machine intelligence. We believe in making the most advanced tools accessible to everyone.</p>
+            <p>Read our <a href="Politics.html" class="legal-link">Privacy Policy & Terms of Service</a> to learn more.</p>
         </section>
     </main>
 
+    <footer>
+        &copy; 2026 Home of AI Platform. All rights reserved.
+    </footer>
+
     <div class="modal-overlay" id="loginModal">
         <div class="modal-content">
-            <h2 style="margin-bottom: 20px;">Welcome Back</h2>
-            <p style="margin-bottom: 30px; color: var(--text-secondary);">Sign in to access your workspace and credits.</p>
-            <button class="btn-primary" id="googleLogin" style="width: 100%;">Continue with Google</button>
-            <button class="btn-outline" onclick="closeModal()" style="width: 100%; margin-top: 12px; border: none;">Cancel</button>
+            <h2 style="margin-bottom: 15px;">Welcome Back</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 25px;">Sign in to access your workspace and credits.</p>
+            <button class="btn-primary" style="width: 100%; margin-bottom: 12px;">Continue with Google</button>
+            <button class="btn-outline" onclick="closeModal()" style="width: 100%; border: none;">Cancel</button>
         </div>
     </div>
 
     <script>
-        // Keeping original Three.js and GSAP logic
-        const navbar = document.getElementById('navbar');
         const modal = document.getElementById('loginModal');
-        const googleLoginBtn = document.getElementById('googleLogin');
-
-        // Three.js Scene Setup
+        function openModal() { modal.style.display = 'flex'; setTimeout(() => modal.classList.add('active'), 10); }
+        function closeModal() { modal.classList.remove('active'); setTimeout(() => modal.style.display = 'none', 400); }
+        
+        // Basic Three.js
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('canvas-scene').appendChild(renderer.domElement);
-
-        const sphereGeo = new THREE.IcosahedronGeometry(4, 15);
-        const sphereMat = new THREE.MeshPhongMaterial({ color: 0x6c5ce7, wireframe: true, transparent: true, opacity: 0.15 });
-        const sphere = new THREE.Mesh(sphereGeo, sphereMat);
+        const sphere = new THREE.Mesh(new THREE.IcosahedronGeometry(4, 15), new THREE.MeshPhongMaterial({ color: 0x6c5ce7, wireframe: true, transparent: true, opacity: 0.15 }));
         scene.add(sphere);
-
-        const light = new THREE.PointLight(0xffffff, 1, 100);
-        light.position.set(10, 10, 10);
-        scene.add(light);
-        scene.add(new THREE.AmbientLight(0x404040));
-
+        scene.add(new THREE.PointLight(0xffffff, 1, 100));
         camera.position.z = 10;
-
-        function animate() {
-            requestAnimationFrame(animate);
-            sphere.rotation.y += 0.001;
-            renderer.render(scene, camera);
-        }
+        function animate() { requestAnimationFrame(animate); sphere.rotation.y += 0.001; renderer.render(scene, camera); }
         animate();
-
-        function openModal() { modal.classList.add('active'); }
-        function closeModal() { modal.classList.remove('active'); }
-        window.openModal = openModal; window.closeModal = closeModal;
-
-        // GSAP Animations
-        gsap.to('.hero h1', { opacity: 1, y: 0, duration: 1, delay: 0.1 });
-        gsap.to('.hero p', { opacity: 1, y: 0, duration: 1, delay: 0.25 });
-        gsap.to('.hero-actions', { opacity: 1, y: 0, duration: 1, delay: 0.4 });
-        gsap.to('.hero-badge', { opacity: 1, y: 0, duration: 0.8, delay: 0.05 });
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 40) navbar.classList.add('scrolled');
-            else navbar.classList.remove('scrolled');
-        });
     </script>
 </body>
 </html>
