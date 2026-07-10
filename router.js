@@ -1,62 +1,45 @@
 /**
- * Home of AI - URL Router & Obfuscator
- * This script manages clean URLs by replacing file names with unique 34-char IDs
+ * Home of AI - URL Router & Obfuscator (GitHub Pages Compatible)
+ * Using Hash-based routing to prevent 404 errors on refresh
  */
 
-const routes = {
-    'index': 'index.html',
-    'home': 'Home.html',
-    'politics': 'Politics.html'
-};
-
-// Function to generate a random 34-character ID
-function generateUniqueID() {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < 34; i++) {
-        result += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return result;
-}
-
-// Generate unique IDs for each page on load (or use persistent ones)
 const pageIDs = {
-    'index': 'main-' + generateUniqueID().substring(0, 29),
-    'home': 'chat-' + generateUniqueID().substring(0, 29),
-    'politics': 'legal-' + generateUniqueID().substring(0, 28)
+    'index': 'main-A1b2C3d4E5f6G7h8I9j0K1l2M3n4O5p6Q7',
+    'home': 'chat-R8s9T0u1V2w3X4y5Z6a7B8c9D0e1F2g3H4',
+    'politics': 'legal-I5j6K7l8M9n0O1p2Q3r4S5t6U7v8W9x0Y1'
 };
 
 function initRouter() {
-    const currentPath = window.location.pathname;
-    const fileName = currentPath.split('/').pop();
+    const hash = window.location.hash.substring(1);
+    const path = window.location.pathname.split('/').pop();
 
-    // Mapping logic to mask the URL
-    if (fileName === 'index.html' || fileName === '') {
-        window.history.replaceState(null, '', '/' + pageIDs.index);
-    } else if (fileName === 'Home.html') {
-        window.history.replaceState(null, '', '/' + pageIDs.home);
-    } else if (fileName === 'Politics.html') {
-        window.history.replaceState(null, '', '/' + pageIDs.politics);
+    // If accessing via filename, redirect to hash for clean URL
+    if (path === 'index.html' && !hash) {
+        window.location.hash = pageIDs.index;
+    } else if (path === 'Home.html' && !hash) {
+        window.location.hash = pageIDs.home;
+    } else if (path === 'Politics.html' && !hash) {
+        window.location.hash = pageIDs.politics;
     }
 }
 
-// Handle internal navigation
+// Handle internal navigation via hash
 document.addEventListener('click', (e) => {
     const target = e.target.closest('a');
-    if (target && target.getAttribute('href')) {
+    if (target) {
         const href = target.getAttribute('href');
-        
-        if (href === 'Politics.html') {
+        if (href === 'index.html') {
             e.preventDefault();
-            window.location.href = 'Politics.html';
+            window.location.href = 'index.html#' + pageIDs.index;
         } else if (href === 'Home.html') {
             e.preventDefault();
-            window.location.href = 'Home.html';
-        } else if (href === 'index.html') {
+            window.location.href = 'Home.html#' + pageIDs.home;
+        } else if (href === 'Politics.html') {
             e.preventDefault();
-            window.location.href = 'index.html';
+            window.location.href = 'Politics.html#' + pageIDs.politics;
         }
     }
 });
 
 window.addEventListener('load', initRouter);
+window.addEventListener('hashchange', initRouter);
