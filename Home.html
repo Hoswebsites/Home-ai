@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Home of AI</title>
     <!-- استدعاء مكتبة Font Awesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -28,10 +28,15 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        html, body {
+            height: 100%;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            height: 100dvh; /* تم التعديل لحل مشكلة شريط المهام في الهواتف */
+            height: 100vh; /* كدعم احتياطي */
+            height: 100dvh; /* للمتصفحات الحديثة */
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -46,6 +51,7 @@
             padding: 15px 20px;
             background-color: transparent;
             z-index: 10;
+            flex-shrink: 0; /* لمنع تقلص الشريط العلوي */
         }
 
         .menu-btn {
@@ -227,11 +233,14 @@
 
         /* --- مستطيل الإدخال --- */
         .input-container {
-            padding: 20px 20px 40px 20px; /* تم رفع المستطيل بمقدار 20px إضافية من الأسفل */
+            /* تعديل جذري لرفع المستطيل على كل الهواتف */
+            padding: 20px 20px calc(45px + env(safe-area-inset-bottom)) 20px; 
             display: flex;
             justify-content: center;
             width: 100%;
             background: linear-gradient(180deg, rgba(18,18,18,0) 0%, rgba(18,18,18,1) 40%);
+            flex-shrink: 0; /* هذا السطر يمنع المتصفح من ضغط أو قص المستطيل */
+            z-index: 20;
         }
 
         .chat-input-wrapper {
